@@ -1,0 +1,24 @@
+<svg width="580" height="400" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+ <defs>
+  <filter height="200%" width="200%" y="-50%" x="-50%" id="svg_2_blur">
+   <feGaussianBlur stdDeviation="6" in="SourceGraphic"/>
+  </filter>
+  <filter height="200%" width="200%" y="-50%" x="-50%" id="svg_1_blur">
+   <feGaussianBlur stdDeviation="0" in="SourceGraphic"/>
+  </filter>
+ </defs>
+ <g>
+  <title>background</title>
+  <rect fill="#ffffff" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <rect filter="url(#svg_2_blur)" rx="39" stroke="#000" id="svg_2" height="282" width="282.000009" y="59" x="149" stroke-opacity="null" stroke-width="0" fill="#4db6ac"/>
+  <ellipse filter="url(#svg_1_blur)" stroke="#000" ry="95.999995" rx="96" id="svg_1" cy="199.999995" cx="290" stroke-width="0" fill="#ff4081"/>
+  <text font-weight="normal" font-style="normal" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="35" id="svg_3" y="212.5" x="216.078125" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ffffff">UniqueIO</text>
+ </g>
+</svg>
