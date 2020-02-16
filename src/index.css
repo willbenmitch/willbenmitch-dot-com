@@ -25,3 +25,7 @@ ul {
     margin: unset;
     padding: unset;
 }
+
+li {
+    margin: 1em 0;
+}

@@ -1,13 +1,13 @@
 import React from 'react'
 import './App.css'
 
-type NameFormProps = {
+type ContactProps = {
     windowWidth: number
     windowHeight: number
 }
 
-export const NameForm = (props: NameFormProps) => {
-    const cols = Math.round(0.05 * props.windowWidth)
+export const Contact = (props: ContactProps) => {
+    // const cols = Math.round(0.12 * props.windowWidth)
     const rows = Math.round(0.01 * props.windowHeight)
     return (
         <form
@@ -18,54 +18,49 @@ export const NameForm = (props: NameFormProps) => {
             accept-charset="utf-8"
         >
             <h2>Contact</h2>
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
-                {/* Labels */}
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <label>First Name</label>
-                    <label>Last Name</label>
-                    <label>Email</label>
-                    <label>Write me a message</label>
-                </div>
-                {/* Inputs */}
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <input type="text" name="lastName" />
-                    <input type="text" name="firstName" />
-                    <input type="text" name="_replyto" />
-                    <textarea name="subject" rows={rows} cols={cols} />
-                    <input type="submit" name="submit" className="btn" />
-                </div>
+            {/* Inputs */}
+            <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+                <input type="text" name="firstName" placeholder="First Name" />
+                <input type="text" name="lastName" placeholder="Last Name" />
+                <input type="text" name="_replyto" placeholder="Email" />
+                <textarea name="subject" rows={rows} placeholder="Write me a message" />
+                <input type="submit" name="submit" className="btn" />
             </div>
         </form>
     )
 }
 
+export const Logo = () => {
+    return <img src="logo.png" style={{ maxWidth: '50%' }} />
+}
+
 export const Header = () => {
     return (
         <div>
-            <h1>WILLBENMITCH</h1>
             <h2>Software Developer</h2>
-            <h5>Experienced in React, React Native, Redux, GraphQL, Apollo, and Node</h5>
+            <p>Experienced building Full Stack software applications for small-medium organizations that solve complex problems.</p>
         </div>
     )
 }
 export const Navigation = () => {
     return (
-        <ul>
-            <li>
-                <a href="#portfolio">Portfolio</a>
-            </li>
-            <li>
-                <a href="#about">About</a>
-            </li>
-            <li>
-                <a href="#contact">Contact</a>
-            </li>
-            <li>
-                <a href="files/BenMitchell_Resume-WebDeveloper-trimmed.pdf" target="_blank" rel="noopener noreferrer">
-                    Resume
-                </a>
-            </li>
-        </ul>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} id="navigation">
+            <ul>
+                <li>
+                    <a href="#portfolio">Portfolio</a>
+                </li>
+                <li>
+                    <a href="#about">About</a>
+                </li>
+                <li>
+                    <a href="#contact">Contact</a>
+                </li>
+                <li>
+                    <a href="#resume">Resume</a>
+                </li>
+            </ul>
+            <Logo />
+        </div>
     )
 }
 
@@ -89,12 +84,12 @@ export const About = () => {
     return (
         <div id="about">
             <h2>About</h2>
-            <h4 className="center">Full Stack</h4>
+            <h4 className="center">Front End</h4>
 
-            <p className="light">
-                My competencies include es6 javascript, react, react-native, redux, graphql, apollo, and node. I have experience working with relational and
-                non-relational databases and building RESTful APIs.
-            </p>
+            <p className="light">My preferred stack include es6 JavaScript, React, React-Native, Redux, and Apollo.</p>
+
+            <h4>Back End</h4>
+            <p>Equally at home in Node or Python.</p>
 
             <h4 className="center">User Experience Focused</h4>
 
@@ -109,9 +104,18 @@ export const About = () => {
     )
 }
 
+export const Resume = () => {
+    return (
+        <a href="files/BenMitchell_Resume-WebDeveloper-trimmed.pdf" target="_blank" rel="noopener noreferrer" id="resume">
+            <h2>Resume</h2>
+        </a>
+    )
+}
+
 export const Footer = () => {
     return (
         <div>
+            <br />
             <ul>
                 <li>
                     <a href="https://www.linkedin.com/in/willbenmitchell/" target="_blank" rel="noopener noreferrer">
@@ -129,7 +133,8 @@ export const Footer = () => {
                     </a>
                 </li>
             </ul>
-            <div>Ben Mitchell - {new Date().getFullYear()}</div>
+            <br />
+            <p style={{ fontSize: 12, opacity: 0.6 }}>Ben Mitchell - {new Date().getFullYear()}</p>
         </div>
     )
 }
@@ -159,11 +164,13 @@ class App extends React.Component<AppProps, AppState> {
     render() {
         return (
             <div>
+                {/* <Logo /> */}
                 <Navigation />
                 <Header />
                 <Portfolio />
                 <About />
-                <NameForm windowHeight={this.state.windowHeight} windowWidth={this.state.windowWidth} />
+                <Contact windowHeight={this.state.windowHeight} windowWidth={this.state.windowWidth} />
+                <Resume />
                 <Footer />
             </div>
         )
