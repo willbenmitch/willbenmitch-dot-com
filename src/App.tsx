@@ -1,5 +1,6 @@
 import React from 'react'
 import './App.css'
+import Theme, { Props as ThemeProps, Themes } from './components/Theme'
 
 type ContactProps = {
     windowWidth: number
@@ -24,14 +25,16 @@ export const Contact = (props: ContactProps) => {
                 <input type="text" name="lastName" placeholder="Last Name" />
                 <input type="text" name="_replyto" placeholder="Email" />
                 <textarea name="subject" rows={rows} placeholder="Write me a message" />
-                <input type="submit" name="submit" className="btn" />
+                <button type="submit" name="submit" className="btn">
+                    Submit
+                </button>
             </div>
         </form>
     )
 }
 
-export const Logo = () => {
-    return <img src="logo.png" style={{ maxWidth: '50%' }} />
+export const Logo = (props: { src: string }) => {
+    return <img src={props.src} style={{ maxWidth: '50%' }} />
 }
 
 export const Header = () => {
@@ -44,23 +47,20 @@ export const Header = () => {
 }
 export const Navigation = () => {
     return (
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} id="navigation">
-            <ul>
-                <li>
-                    <a href="#portfolio">Portfolio</a>
-                </li>
-                <li>
-                    <a href="#about">About</a>
-                </li>
-                <li>
-                    <a href="#contact">Contact</a>
-                </li>
-                <li>
-                    <a href="#resume">Resume</a>
-                </li>
-            </ul>
-            <Logo />
-        </div>
+        <ul>
+            <li>
+                <a href="#portfolio">Portfolio</a>
+            </li>
+            <li>
+                <a href="#about">About</a>
+            </li>
+            <li>
+                <a href="#contact">Contact</a>
+            </li>
+            <li>
+                <a href="#resume">Resume</a>
+            </li>
+        </ul>
     )
 }
 
@@ -143,10 +143,11 @@ type AppProps = {}
 type AppState = {
     windowWidth: number
     windowHeight: number
+    theme: Themes
 }
 
 class App extends React.Component<AppProps, AppState> {
-    state = { windowWidth: 0, windowHeight: 0 }
+    state = { windowWidth: 0, windowHeight: 0, theme: Themes.dark }
 
     componentDidMount() {
         this.updateWindowDimensions()
@@ -161,11 +162,21 @@ class App extends React.Component<AppProps, AppState> {
         this.setState({ windowWidth: window.innerWidth, windowHeight: window.innerHeight })
     }
 
+    toggleTheme = () => {
+        const newTheme = this.state.theme == Themes.dark ? Themes.light : Themes.dark
+        this.setState({ theme: newTheme })
+    }
+
     render() {
+        const logoSrc = this.state.theme == Themes.dark ? 'logo-dark.png' : 'logo.png'
         return (
             <div>
-                {/* <Logo /> */}
-                <Navigation />
+                <Theme theme={this.state.theme} />
+                <button onClick={this.toggleTheme}>Toggle Theme</button>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} id="navigation">
+                    <Navigation />
+                    <Logo src={logoSrc} />
+                </div>
                 <Header />
                 <Portfolio />
                 <About />
