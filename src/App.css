@@ -36,3 +36,29 @@
         transform: rotate(360deg);
     }
 }
+
+input,
+textarea {
+    background-color: var(--colorBackground);
+    color: var(--colorSurface);
+    border-color: var(--colorSecondary);
+    margin: 1em 0em;
+    box-shadow: none !important;
+}
+
+button {
+    background-color: var(--colorPrimary);
+    color: var(--colorAccent);
+    border-color: var(--colorPrimary);
+    box-shadow: 2em;
+    cursor: pointer;
+    padding: 2px 14px 4px;
+}
+
+.logo-enter {
+    opacity: 0;
+}
+.logo-enter-active {
+    opacity: 1;
+    transition: opacity 1000ms;
+}

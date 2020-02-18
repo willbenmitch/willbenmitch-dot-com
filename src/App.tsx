@@ -1,4 +1,5 @@
 import React from 'react'
+import { CSSTransition } from 'react-transition-group'
 import './App.css'
 import Theme, { Props as ThemeProps, Themes } from './components/Theme'
 
@@ -34,7 +35,7 @@ export const Contact = (props: ContactProps) => {
 }
 
 export const Logo = (props: { src: string }) => {
-    return <img src={props.src} style={{ maxWidth: '50%' }} />
+    return <img src={props.src} style={{ maxWidth: '50%' }} className="logo" />
 }
 
 export const Header = () => {
@@ -144,10 +145,11 @@ type AppState = {
     windowWidth: number
     windowHeight: number
     theme: Themes
+    transition: boolean
 }
 
 class App extends React.Component<AppProps, AppState> {
-    state = { windowWidth: 0, windowHeight: 0, theme: Themes.dark }
+    state = { windowWidth: 0, windowHeight: 0, theme: Themes.dark, transition: false }
 
     componentDidMount() {
         this.updateWindowDimensions()
@@ -164,7 +166,7 @@ class App extends React.Component<AppProps, AppState> {
 
     toggleTheme = () => {
         const newTheme = this.state.theme == Themes.dark ? Themes.light : Themes.dark
-        this.setState({ theme: newTheme })
+        this.setState({ theme: newTheme, transition: true })
     }
 
     render() {
@@ -175,7 +177,9 @@ class App extends React.Component<AppProps, AppState> {
                 <button onClick={this.toggleTheme}>Toggle Theme</button>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} id="navigation">
                     <Navigation />
-                    <Logo src={logoSrc} />
+                    <CSSTransition in={this.state.transition} timeout={300} classNames="logo" onEntered={() => this.setState({ transition: false })}>
+                        <Logo src={logoSrc} />
+                    </CSSTransition>
                 </div>
                 <Header />
                 <Portfolio />
