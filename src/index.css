@@ -1,5 +1,6 @@
 @font-face {
     font-family: JetBrainsMono;
+    font-weight: normal;
     src: url('fonts/JetBrainsMono/woff/JetBrainsMono-Regular.woff');
 }
 @font-face {
@@ -9,9 +10,9 @@
 }
 :root {
     --colorPrimary: teal;
-    --colorSecondary: grey;
+    --colorSecondary: #496285;
     --colorSurface: white;
-    --colorBackground: black;
+    --colorBackground: rgb(25, 26, 26);
     --colorAccent: white;
 }
 
