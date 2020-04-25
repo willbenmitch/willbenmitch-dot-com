@@ -10,7 +10,7 @@
 }
 :root {
     --colorPrimary: teal;
-    --colorSecondary: grey;
+    --colorSecondary: #496285;
     --colorSurface: white;
     --colorBackground: rgb(25, 26, 26);
     --colorAccent: white;
