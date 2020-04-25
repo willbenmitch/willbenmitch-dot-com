@@ -5,6 +5,7 @@ export type ThemeType = {
     colorSecondary: string
     colorSurface: string
     colorBackground: string
+    colorAccent: string
 }
 
 export enum Themes {
@@ -12,18 +13,29 @@ export enum Themes {
     light = 'light',
 }
 
+export enum Color {
+    dark = 'rgb(25, 26, 26)',
+    black = 'black',
+    teal = 'teal',
+    grey = 'grey',
+    white = 'white',
+    cadencePrimary = '#496285',
+}
+
 const themes: { dark: ThemeType; light: ThemeType } = {
     dark: {
-        colorPrimary: 'teal',
-        colorSecondary: 'grey',
-        colorSurface: 'white',
-        colorBackground: 'black',
+        colorPrimary: Color.teal,
+        colorSecondary: Color.cadencePrimary,
+        colorSurface: Color.white,
+        colorBackground: Color.dark,
+        colorAccent: Color.white,
     },
     light: {
-        colorPrimary: 'teal',
-        colorSecondary: 'grey',
-        colorSurface: 'black',
-        colorBackground: 'white',
+        colorPrimary: Color.teal,
+        colorSecondary: Color.cadencePrimary,
+        colorSurface: Color.dark,
+        colorBackground: Color.white,
+        colorAccent: Color.white,
     },
 }
 

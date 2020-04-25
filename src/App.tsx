@@ -1,7 +1,7 @@
 import React from 'react'
 import { CSSTransition } from 'react-transition-group'
 import './App.css'
-import Theme, { Props as ThemeProps, Themes } from './components/Theme'
+import Theme, { Themes } from './components/Theme'
 
 type ContactProps = {
     windowWidth: number
@@ -9,7 +9,6 @@ type ContactProps = {
 }
 
 export const Contact = (props: ContactProps) => {
-    // const cols = Math.round(0.12 * props.windowWidth)
     const rows = Math.round(0.01 * props.windowHeight)
     return (
         <form
@@ -19,7 +18,7 @@ export const Contact = (props: ContactProps) => {
             method="POST"
             accept-charset="utf-8"
         >
-            <h2>Contact</h2>
+            <h1>Contact</h1>
             {/* Inputs */}
             <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                 <input type="text" name="firstName" placeholder="First Name" />
@@ -34,15 +33,30 @@ export const Contact = (props: ContactProps) => {
     )
 }
 
-export const Logo = (props: { src: string }) => {
-    return <img src={props.src} style={{ maxWidth: '50%' }} className="logo" />
+export const Logo = (props: { src: string; onIn: boolean; onEntered: () => void; display?: string }) => {
+    const { src, onIn, onEntered, display } = props
+    return (
+        <CSSTransition in={onIn} timeout={300} classNames="logo" onEntered={onEntered}>
+            <img src={src} style={{ display }} className="logo" alt="W / B / M" />
+        </CSSTransition>
+    )
 }
 
 export const Header = () => {
     return (
         <div>
-            <h2>Software Developer</h2>
+            <h1>Software Developer</h1>
             <p>Experienced building Full Stack software applications for small-medium organizations that solve complex problems.</p>
+            <h3 className="center">Front End</h3>
+
+            <p className="light">My preferred stack include es6 JavaScript, React, React-Native, Redux, and Apollo.</p>
+
+            <h3>Back End</h3>
+            <p>Equally at home in Node or Python.</p>
+
+            <h3 className="center">User Experience Focused</h3>
+
+            <p className="light">I believe in building applications with the end user in mind; making sure applications are usable, useful, and accessible.</p>
         </div>
     )
 }
@@ -68,14 +82,35 @@ export const Navigation = () => {
 export const Portfolio = () => {
     return (
         <div id="portfolio">
-            <h2>Portfolio</h2>
-            <h4>CadenceBot</h4>
-            <p>
+            <h1>Portfolio</h1>
+            <h3>
                 <a href="https://cadencebot.com" target="_blank" rel="noopener noreferrer">
                     CadenceBot
-                </a>{' '}
-                reduces complexity in the code review process by being your main point of contact for everything involving code reviews. Integrating with both
-                Slack and Github, your team is now able to manage their code reviews directly in Slack.
+                </a>
+            </h3>
+            <p>
+                CadenceBot reduces complexity in the code review process by being your main point of contact for everything involving code reviews. Integrating
+                with both Slack and Github, your team is now able to manage their code reviews directly in Slack.
+            </p>
+            <h3>
+                <a href="https://georgeclooneyofpugs.com" target="_blank" rel="noopener noreferrer">
+                    George Clooney of Pugs Dot Com
+                </a>
+            </h3>
+            <p>A tribute page to my first dog, Sebastian.</p>
+            <h3>
+                <a href="https://github.com/willbenmitch/bugger-your-neighbour" target="_blank" rel="noopener noreferrer">
+                    Bugger Your Neighbour
+                </a>
+            </h3>
+            <p>
+                A repository for hosting your own game of Bugger Your Neighbour (aka{' '}
+                {
+                    <a href="https://en.wikipedia.org/wiki/Oh_Hell" target="_blank" rel="noopener noreferrer">
+                        Oh, Hell
+                    </a>
+                }
+                ).
             </p>
         </div>
     )
@@ -84,19 +119,7 @@ export const Portfolio = () => {
 export const About = () => {
     return (
         <div id="about">
-            <h2>About</h2>
-            <h4 className="center">Front End</h4>
-
-            <p className="light">My preferred stack include es6 JavaScript, React, React-Native, Redux, and Apollo.</p>
-
-            <h4>Back End</h4>
-            <p>Equally at home in Node or Python.</p>
-
-            <h4 className="center">User Experience Focused</h4>
-
-            <p className="light">I believe in building applications with the end user in mind; making sure applications are usable, useful, and accessible.</p>
-            <h4 className="center">Lifelong Learner</h4>
-
+            <h1>About</h1>
             <p className="light">
                 Formerly an operations manager in the technology sector, I was drawn to the world of development when I embarked on building a company of my own
                 in 2016. I strive to always be building on past experiences.
@@ -108,7 +131,7 @@ export const About = () => {
 export const Resume = () => {
     return (
         <a href="files/BenMitchell_Resume-WebDeveloper-trimmed.pdf" target="_blank" rel="noopener noreferrer" id="resume">
-            <h2>Resume</h2>
+            <h1>Resume</h1>
         </a>
     )
 }
@@ -165,21 +188,30 @@ class App extends React.Component<AppProps, AppState> {
     }
 
     toggleTheme = () => {
-        const newTheme = this.state.theme == Themes.dark ? Themes.light : Themes.dark
+        const newTheme = this.state.theme === Themes.dark ? Themes.light : Themes.dark
         this.setState({ theme: newTheme, transition: true })
     }
 
     render() {
-        const logoSrc = this.state.theme == Themes.dark ? 'logo-dark.png' : 'logo.png'
         return (
             <div>
                 <Theme theme={this.state.theme} />
-                <button onClick={this.toggleTheme}>Toggle Theme</button>
+                <button onClick={this.toggleTheme}>Dark Mode {this.state.theme === Themes.dark ? 'Off' : 'On'}</button>
+                {}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} id="navigation">
                     <Navigation />
-                    <CSSTransition in={this.state.transition} timeout={300} classNames="logo" onEntered={() => this.setState({ transition: false })}>
-                        <Logo src={logoSrc} />
-                    </CSSTransition>
+                    <Logo
+                        src="logo-dark-transparent.png"
+                        display={this.state.theme === Themes.light ? 'none' : undefined}
+                        onIn={this.state.transition}
+                        onEntered={() => this.setState({ transition: false })}
+                    />
+                    <Logo
+                        src="logo-transparent.png"
+                        display={this.state.theme === Themes.dark ? 'none' : undefined}
+                        onIn={this.state.transition}
+                        onEntered={() => this.setState({ transition: false })}
+                    />
                 </div>
                 <Header />
                 <Portfolio />
