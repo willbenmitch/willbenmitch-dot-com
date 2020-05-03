@@ -46,13 +46,13 @@ export const Header = () => {
     return (
         <div>
             <h1>Software Developer</h1>
-            <p>Experienced building Full Stack software applications for small-medium organizations that solve complex problems.</p>
+            <p>Experienced building Full Stack software applications for small-to-medium organizations that solve complex problems.</p>
             <h3 className="center">Front End</h3>
 
-            <p className="light">My preferred stack include es6 JavaScript, React, React-Native, Redux, and Apollo.</p>
+            <p className="light">My preferred stack includes es6 JavaScript/TypeScript, React, and Redux.</p>
 
             <h3>Back End</h3>
-            <p>Equally at home in Node or Python.</p>
+            <p>Equally at home in Node or Python. For datastorage, I have worked commericially with PostgreSQL using the Sequelize ORM.</p>
 
             <h3 className="center">User Experience Focused</h3>
 
@@ -99,18 +99,27 @@ export const Portfolio = () => {
             </h3>
             <p>A tribute page to my first dog, Sebastian.</p>
             <h3>
-                <a href="https://github.com/willbenmitch/bugger-your-neighbour" target="_blank" rel="noopener noreferrer">
-                    Bugger Your Neighbour
+                <a href="https://buggeryourneighbour.com" target="_blank" rel="noopener noreferrer">
+                    Bugger Your Neighbour (Card Game)
                 </a>
             </h3>
             <p>
-                A repository for hosting your own game of Bugger Your Neighbour (aka{' '}
+                Bugger Your Neighbour (aka{' '}
                 {
                     <a href="https://en.wikipedia.org/wiki/Oh_Hell" target="_blank" rel="noopener noreferrer">
                         Oh, Hell
                     </a>
                 }
-                ).
+                ) is my family's favourite card game. During the covid-19 quarantine of 2020, I decided to put together a place for us to gather and play.
+                <br />
+                <br />
+                For rules, or to contribute to the project, view the{' '}
+                {
+                    <a href="https://github.com/willbenmitch/bugger-your-neighbour#rules" target="_blank" rel="noopener noreferrer">
+                        repository
+                    </a>
+                }
+                .
             </p>
         </div>
     )
