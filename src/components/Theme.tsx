@@ -8,7 +8,7 @@ export type ThemeType = {
     colorAccent: string
 }
 
-export enum Themes {
+export enum ThemeStyle {
     dark = 'dark',
     light = 'light',
 }
@@ -40,7 +40,8 @@ const themes: { dark: ThemeType; light: ThemeType } = {
 }
 
 export type Props = {
-    theme: Themes
+    theme: ThemeStyle
+    onChangeTheme: () => void
 }
 type State = {}
 
@@ -68,8 +69,12 @@ class Theme extends React.Component<Props, State> {
     setThemeVariable = (key: string, value: string) => {
         document.documentElement.style.setProperty(`--${key}`, value)
     }
+
     render() {
-        return null
+        const { onChangeTheme } = this.props
+        return (
+            <button onClick={onChangeTheme}>Dark Mode {this.props.theme === ThemeStyle.dark ? 'Off' : 'On'}</button>
+        )
     }
 }
 
