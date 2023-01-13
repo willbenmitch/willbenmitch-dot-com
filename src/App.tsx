@@ -1,7 +1,7 @@
 import React from 'react'
 import { CSSTransition } from 'react-transition-group'
 import './App.css'
-import Theme, { Themes } from './components/Theme'
+import Theme, { ThemeStyle } from './components/Theme'
 
 type ContactProps = {
     windowWidth: number
@@ -176,12 +176,12 @@ type AppProps = {}
 type AppState = {
     windowWidth: number
     windowHeight: number
-    theme: Themes
+    theme: ThemeStyle
     transition: boolean
 }
 
 class App extends React.Component<AppProps, AppState> {
-    state = { windowWidth: 0, windowHeight: 0, theme: Themes.dark, transition: false }
+    state = { windowWidth: 0, windowHeight: 0, theme: ThemeStyle.dark, transition: false }
 
     componentDidMount() {
         this.updateWindowDimensions()
@@ -197,27 +197,27 @@ class App extends React.Component<AppProps, AppState> {
     }
 
     toggleTheme = () => {
-        const newTheme = this.state.theme === Themes.dark ? Themes.light : Themes.dark
+        const newTheme = this.state.theme === ThemeStyle.dark ? ThemeStyle.light : ThemeStyle.dark
         this.setState({ theme: newTheme, transition: true })
     }
+
 
     render() {
         return (
             <div>
-                <Theme theme={this.state.theme} />
-                <button onClick={this.toggleTheme}>Dark Mode {this.state.theme === Themes.dark ? 'Off' : 'On'}</button>
+                <Theme theme={this.state.theme} onChangeTheme={this.toggleTheme} />
                 {}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} id="navigation">
                     <Navigation />
                     <Logo
                         src="logo-dark-transparent.png"
-                        display={this.state.theme === Themes.light ? 'none' : undefined}
+                        display={this.state.theme === ThemeStyle.light ? 'none' : undefined}
                         onIn={this.state.transition}
                         onEntered={() => this.setState({ transition: false })}
                     />
                     <Logo
                         src="logo-transparent.png"
-                        display={this.state.theme === Themes.dark ? 'none' : undefined}
+                        display={this.state.theme === ThemeStyle.dark ? 'none' : undefined}
                         onIn={this.state.transition}
                         onEntered={() => this.setState({ transition: false })}
                     />
